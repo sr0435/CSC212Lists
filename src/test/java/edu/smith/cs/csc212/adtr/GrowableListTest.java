@@ -109,7 +109,7 @@ public class GrowableListTest {
 		Assert.assertEquals("0", data.getIndex(1));
 		Assert.assertEquals("1", data.getIndex(0));
 	}
-	
+	//TODO null pointer exception
 	@Test
 	public void testAddBackFull() {
 		ListADT<Integer> items = makeEmptyList();
@@ -122,7 +122,7 @@ public class GrowableListTest {
 			Assert.assertEquals((i+1)*3, (int) items.getIndex(i)); 
 		}
 	}
-	
+	// TODO is looping forever, needs to be fixed after addFront and/or remove back
 	@Test
 	public void testAddFrontFull() {
 		ListADT<Integer> items1 = makeEmptyList();
@@ -150,6 +150,7 @@ public class GrowableListTest {
 		items.addBack(num);
 	}
 	
+	//TODO : null pointer exception
 	@Test
 	public void testAddIndexMany() {
 		ListADT<Integer> items1 = makeEmptyList();
@@ -173,11 +174,16 @@ public class GrowableListTest {
 		}
 	}
 	
+	// TODO failure
 	@Test
 	public void testRemoveFront() {
 		ListADT<String> data = makeABCDList();
 		Assert.assertEquals(4, data.size());
+		System.out.println(data.getFront());
+		System.out.println(data.getBack());
 		Assert.assertEquals("a", data.removeFront());
+		System.out.println(data.getFront());
+		System.out.println(data.getBack());
 		Assert.assertEquals(3, data.size());
 		Assert.assertEquals("b", data.removeFront());
 		Assert.assertEquals(2, data.size());
@@ -187,6 +193,7 @@ public class GrowableListTest {
 		Assert.assertEquals(0, data.size());
 	}
 	
+	// TODO failure
 	@Test
 	public void testRemoveBack() {
 		ListADT<String> data = makeABCDList();
@@ -201,8 +208,10 @@ public class GrowableListTest {
 		Assert.assertEquals(0, data.size());
 	}
 	
+	// done!
 	@Test
 	public void testRemoveIndex() {
+		System.out.println("remove index");
 		ListADT<String> data = makeABCDList();
 		Assert.assertEquals(4, data.size());
 		Assert.assertEquals("c", data.removeIndex(2));
@@ -213,6 +222,7 @@ public class GrowableListTest {
 		Assert.assertEquals(1, data.size());
 		Assert.assertEquals("a", data.removeIndex(0));
 		Assert.assertEquals(0, data.size());
+
 	}
 	
 	@Test
@@ -313,24 +323,25 @@ public class GrowableListTest {
 		data.addIndex(-1, "the");
 	}
 	
+	// TODO supposed to give bad index error but giving a todo error instead
 	@Test(expected=BadIndexError.class)
 	public void testSetIndexHighEasy() {
 		ListADT<String> data = makeABCDList();
 		data.setIndex(data.size()*2, "the");
 	}
-	
+	// TODO todo error
 	@Test(expected=BadIndexError.class)
 	public void testSetIndexHigh() {
 		ListADT<String> data = makeABCDList();
 		data.setIndex(data.size(), "the");
 	}
-	
+	// TODO error
 	@Test(expected=BadIndexError.class)
 	public void testSetIndexLow() {
 		ListADT<String> data = makeABCDList();
 		data.setIndex(-1, "the");
 	}
-	
+	// TODO : todo error
 	@Test
 	public void testSetIndexEasy() {
 		ListADT<String> data = makeABCDList();
