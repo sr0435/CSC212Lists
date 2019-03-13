@@ -32,11 +32,10 @@ public class GrowableList<T> extends ListADT<T> {
 		
 		T removed = this.getIndex(index);
 		
-		// TODO: Now we need to slide everything to the left.
-		for (int j=fill-1; j>index; j--) {
-			//array[j-1] = array[j]; replaces everything with d
+		// : Now we need to slide everything to the left. done!
+		for (int j=index+1; j<fill; j++) {
+			array[j-1] = array[j];
 			}
-		System.out.println(array);
 		fill -= 1;
 		// When we're done, give back the thing that we removed.
 		return removed;

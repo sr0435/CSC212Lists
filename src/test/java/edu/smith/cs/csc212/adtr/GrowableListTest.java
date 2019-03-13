@@ -122,7 +122,7 @@ public class GrowableListTest {
 			Assert.assertEquals((i+1)*3, (int) items.getIndex(i)); 
 		}
 	}
-	// TODO is looping forever, needs to be fixed after addFront and/or remove back
+	// TODO out of bounds
 	@Test
 	public void testAddFrontFull() {
 		ListADT<Integer> items1 = makeEmptyList();
@@ -174,16 +174,12 @@ public class GrowableListTest {
 		}
 	}
 	
-	// TODO failure
+
 	@Test
 	public void testRemoveFront() {
 		ListADT<String> data = makeABCDList();
 		Assert.assertEquals(4, data.size());
-		System.out.println(data.getFront());
-		System.out.println(data.getBack());
 		Assert.assertEquals("a", data.removeFront());
-		System.out.println(data.getFront());
-		System.out.println(data.getBack());
 		Assert.assertEquals(3, data.size());
 		Assert.assertEquals("b", data.removeFront());
 		Assert.assertEquals(2, data.size());
