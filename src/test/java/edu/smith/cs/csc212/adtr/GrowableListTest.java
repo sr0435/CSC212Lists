@@ -117,6 +117,7 @@ public class GrowableListTest {
 			items.addBack((i+1)*3);
 			Assert.assertEquals(i+1, items.size());
 			Assert.assertEquals((i+1)*3, (int) items.getBack()); 
+			
 
 		}
 		for (int i=0; i<GrowableList.START_SIZE*5; i++) {

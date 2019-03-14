@@ -58,6 +58,7 @@ public class GrowableList<T> extends ListADT<T> {
 	/**
 	 * This private method is called when we need to make room in our GrowableList.
 	 */
+	
 	private void resizeArray() {
 		//saves the items in the old array
 		Object[] oldArray = array.clone();
