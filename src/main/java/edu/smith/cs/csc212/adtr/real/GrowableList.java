@@ -1,6 +1,7 @@
 package edu.smith.cs.csc212.adtr.real;
 
 import edu.smith.cs.csc212.adtr.ListADT;
+import edu.smith.cs.csc212.adtr.errors.BadIndexError;
 import edu.smith.cs.csc212.adtr.errors.TODOErr;
 
 public class GrowableList<T> extends ListADT<T> {
@@ -58,14 +59,17 @@ public class GrowableList<T> extends ListADT<T> {
 	 * This private method is called when we need to make room in our GrowableList.
 	 */
 	private void resizeArray() {
-		if (fill > array.length) {
-			array = new Object[fill+1];
+		//saves the items in the old array
+		Object[] oldArray = array.clone();
+		// creates a new array that's twice the size
+		array = new Object[fill*2];
+		int i = 0;
+		for (Object item : oldArray) {
+			array[i] = item;
+			i++;
 		}
-		else if (fill < array.length) {
-			array = new Object[fill-1];
-		}
-		//System.out.println(array.length);
-		//throw new TODOErr();
+
+
 	}
 
 	@Override
@@ -119,8 +123,16 @@ public class GrowableList<T> extends ListADT<T> {
 	}
 
 	@Override
+	// TODO : ask John what exactly set index is supposed to do
+	// is it supposed to replace what was already there or add something new
+	// currently it's replacing
 	public void setIndex(int index, T value) {
-		throw new TODOErr();
+		checkInclusiveIndex(index);
+		// for set index high test
+		if (index == fill) {
+			throw new BadIndexError(index);
+		}
+		array[index] = value;
 	}
 
 }
