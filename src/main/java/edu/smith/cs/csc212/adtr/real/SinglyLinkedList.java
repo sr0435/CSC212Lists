@@ -98,8 +98,9 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 			checkInclusiveIndex(index);
 			int step = 0;
 			for (Node<T> n = this.start; n != null; n = n.next) {
-				if (step == index) {
+				if (n.next == null) {
 					addBack(item);
+					System.out.println("eee");
 					break;
 				}
 				if (step == index-1) {
@@ -145,12 +146,7 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 	@Override
 	public void setIndex(int index, T value) {
 		checkNotEmpty();
-		if (index < 0) {
-			throw new BadIndexError(index);
-		}
-		if (index >= size()) {
-			throw new BadIndexError(index);
-		}
+		checkExclusiveIndex(index);
 		int step = 0;
 		for (Node<T> n = this.start; n != null; n = n.next) {
 			if (step == index) {

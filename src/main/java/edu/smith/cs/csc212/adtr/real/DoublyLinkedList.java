@@ -46,21 +46,22 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	@Override
 	public T removeIndex(int index) {
 		checkNotEmpty();
-		checkInclusiveIndex(index);
 		int step = 0;
 		if (index == 0) {
 			T removed = removeFront();
 			return removed;
 		}
-		for (Node<T> n = start; n != null; n = n.after) {
-			if (step == index-1) {
-				T removed = n.after.value;
-				n.after = n.after.after;
-				return removed;
+		else {
+			for (Node<T> n = start; n != null; n = n.after) {
+				if (step == index-1) {
+					T removed = n.after.value;
+					n.after = n.after.after;
+					return removed;
+				}
+				step++;
 			}
-			step++;
+			return null;
 		}
-		return null;
 	}
 	//
 	@Override
@@ -77,7 +78,7 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	}
 	@Override
 	public void addBack(T item) {
-		if (end == null) {
+		if (this.isEmpty()) {
 			start = end = new Node<T>(item);
 		} else {
 			Node<T> secondLast = end;
@@ -86,10 +87,30 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 			secondLast.after = end;
 		}
 	}
-	//TODO
+	//
 	@Override
 	public void addIndex(int index, T item) {
-		throw new TODOErr();
+		checkInclusiveIndex(index);
+		if (index == 0 || this.isEmpty()) {
+			addFront(item);
+		}
+		else {
+			int step = 0;
+			for (Node<T> n = start; n != null; n = n.after) {
+				if (n.after == null) {
+					addBack(item);
+					break;
+				}
+				else if (step == index-1) {
+					Node<T> newNode = new Node<T>(item);
+					newNode.before = n;
+					newNode.after = n.after;
+					n.after = newNode;
+					break;
+				}
+				step++;
+			}	 
+		}	
 	}
 	//
 	@Override
@@ -125,7 +146,15 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	}
 	//TODO
 	public void setIndex(int index, T value) {
-		throw new TODOErr();
+		checkNotEmpty();
+		checkExclusiveIndex(index);
+		int step =0;
+		for (Node<T> n = this.start; n != null; n = n.after) {
+			if (step == index) {
+				n.value = value;
+			}
+			step++;
+		}
 	}
 	//
 	@Override

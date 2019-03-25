@@ -125,7 +125,7 @@ public class GrowableList<T> extends ListADT<T> {
 
 	@Override
 	public void setIndex(int index, T value) {
-		checkInclusiveIndex(index);
+		checkExclusiveIndex(index);
 		// for set index high test
 		if (index == fill) {
 			throw new BadIndexError(index);
