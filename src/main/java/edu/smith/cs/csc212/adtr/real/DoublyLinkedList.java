@@ -144,7 +144,7 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 		}
 		return null;
 	}
-	//TODO
+	//
 	public void setIndex(int index, T value) {
 		checkNotEmpty();
 		checkExclusiveIndex(index);

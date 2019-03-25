@@ -25,32 +25,51 @@ public class ChunkyArrayList<T> extends ListADT<T> {
 	private FixedSizeList<T> makeChunk() {
 		return new FixedSizeList<>(chunkSize);
 	}
-
+// TODO
 	@Override
 	public T removeFront() {
 		throw new TODOErr();
 	}
-
+// TODO
 	@Override
 	public T removeBack() {
-		throw new TODOErr();
+		T removed = chunks.getBack().getBack();
+		return removed;
 	}
-
+// TODO
 	@Override
 	public T removeIndex(int index) {
 		throw new TODOErr();
 	}
-
+// TODO
 	@Override
 	public void addFront(T item) {
-		throw new TODOErr();
+		if (chunks.isEmpty()) {
+			FixedSizeList<T> front = makeChunk();
+			chunks.addBack(front);
+		}
+		FixedSizeList<T> front = chunks.getFront();
+		if (front.isFull()) {
+			front = makeChunk();
+			chunks.addFront(front);
+		}
+		front.addFront(item);
 	}
-
+// TODO
 	@Override
 	public void addBack(T item) {
-		throw new TODOErr();
+		if (chunks.isEmpty()) {
+			FixedSizeList<T> back = makeChunk();
+			chunks.addBack(back);
+		}
+		FixedSizeList<T> back = chunks.getBack();
+		if (back.isFull()) {
+			back = makeChunk();
+			chunks.addBack(back);
+		}
+		back.addBack(item);
 	}
-
+// TODO
 	@Override
 	public void addIndex(int index, T item) {
 		// THIS IS THE HARDEST METHOD IN CHUNKY-ARRAY-LIST.
@@ -114,7 +133,7 @@ public class ChunkyArrayList<T> extends ListADT<T> {
 		}
 		throw new BadIndexError(index);
 	}
-	
+// TODO
 	@Override
 	public void setIndex(int index, T value) {
 		throw new TODOErr();
