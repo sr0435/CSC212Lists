@@ -325,7 +325,6 @@ public class GrowableListTest {
 		ListADT<String> data = makeABCDList();
 		data.setIndex(data.size()*2, "the");
 	}
-	// TODO : why can't we replace what's in the last spot?? 
 	@Test(expected=BadIndexError.class)
 	public void testSetIndexHigh() {
 		ListADT<String> data = makeABCDList();

@@ -104,7 +104,6 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 				}
 				if (step == index-1) {
 					n.next = new Node<T>(item,n.next);
-					System.out.println("next value " + n.next.value);
 					break;
 				}
 				step++;
@@ -143,11 +142,22 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 		throw new BadIndexError(index);
 	}
 	
-	// TODO
 	@Override
 	public void setIndex(int index, T value) {
 		checkNotEmpty();
-		throw new TODOErr();
+		if (index < 0) {
+			throw new BadIndexError(index);
+		}
+		if (index >= size()) {
+			throw new BadIndexError(index);
+		}
+		int step = 0;
+		for (Node<T> n = this.start; n != null; n = n.next) {
+			if (step == index) {
+				n.value = value;
+			}
+			step++;
+		}
 	}
 
 	@Override

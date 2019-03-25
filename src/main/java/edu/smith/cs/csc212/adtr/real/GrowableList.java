@@ -124,9 +124,6 @@ public class GrowableList<T> extends ListADT<T> {
 	}
 
 	@Override
-	// TODO : ask John what exactly set index is supposed to do
-	// is it supposed to replace what was already there or add something new
-	// currently it's replacing
 	public void setIndex(int index, T value) {
 		checkInclusiveIndex(index);
 		// for set index high test
