@@ -252,6 +252,9 @@ public class SinglyLinkedListTest {
 		data.addIndex(1, "B");
 		Assert.assertEquals(5, data.size());
 		Assert.assertEquals("B", data.getIndex(1));
+
+
+
 	}
 	
 	@Test

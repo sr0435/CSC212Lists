@@ -88,10 +88,28 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 			}
 		}
 	}
-	// TODO
+	// 
 	@Override
 	public void addIndex(int index, T item) {
-		throw new TODOErr();
+		if (index == 0 || this.isEmpty()) {
+			addFront(item);
+		}
+		else {
+			checkInclusiveIndex(index);
+			int step = 0;
+			for (Node<T> n = this.start; n != null; n = n.next) {
+				if (step == index) {
+					addBack(item);
+					break;
+				}
+				if (step == index-1) {
+					n.next = new Node<T>(item,n.next);
+					System.out.println("next value " + n.next.value);
+					break;
+				}
+				step++;
+			}
+		}
 	}
 	
 	
