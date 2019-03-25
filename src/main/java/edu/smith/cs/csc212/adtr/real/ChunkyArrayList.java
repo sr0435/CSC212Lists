@@ -1,5 +1,7 @@
 package edu.smith.cs.csc212.adtr.real;
 
+import javax.xml.stream.events.StartDocument;
+
 import edu.smith.cs.csc212.adtr.ListADT;
 import edu.smith.cs.csc212.adtr.errors.BadIndexError;
 import edu.smith.cs.csc212.adtr.errors.EmptyListError;
@@ -25,15 +27,24 @@ public class ChunkyArrayList<T> extends ListADT<T> {
 	private FixedSizeList<T> makeChunk() {
 		return new FixedSizeList<>(chunkSize);
 	}
-// TODO
+// TODO done, but is it O(n^2) or O(2n)?
 	@Override
 	public T removeFront() { 
-		throw new TODOErr();
+		T removed = chunks.getFront().getFront();
+		chunks.getFront().removeFront();
+		if (chunks.getFront().isEmpty()) {
+			chunks.removeFront();
+		}
+		return removed;
 	}
-// TODO
+// 
 	@Override
 	public T removeBack() {
 		T removed = chunks.getBack().getBack();
+		chunks.getBack().removeBack();
+		if (chunks.getBack().isEmpty()) {
+			chunks.removeBack();
+		}
 		return removed;
 	}
 // TODO
@@ -41,7 +52,7 @@ public class ChunkyArrayList<T> extends ListADT<T> {
 	public T removeIndex(int index) {
 		throw new TODOErr();
 	}
-// TODO
+// 
 	@Override
 	public void addFront(T item) {
 		if (chunks.isEmpty()) {
@@ -55,7 +66,7 @@ public class ChunkyArrayList<T> extends ListADT<T> {
 		}
 		front.addFront(item);
 	}
-// TODO
+// 
 	@Override
 	public void addBack(T item) {
 		if (chunks.isEmpty()) {
@@ -133,10 +144,23 @@ public class ChunkyArrayList<T> extends ListADT<T> {
 		}
 		throw new BadIndexError(index);
 	}
-// TODO
+// 
 	@Override
 	public void setIndex(int index, T value) {
-		throw new TODOErr();
+		if (this.isEmpty()) {
+			throw new EmptyListError();
+		}
+		int start = 0;
+		for (FixedSizeList<T> chunk : this.chunks) {
+			int end = start + chunk.size();
+			if (start <= index && index < end) {
+				System.out.println("index " + index);
+				chunk.setIndex(index-start, value);
+				return;
+			}
+			start = end;
+		}
+		throw new BadIndexError(index);
 	}
 
 	@Override
