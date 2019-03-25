@@ -7,7 +7,7 @@ import edu.smith.cs.csc212.adtr.errors.TODOErr;
 
 public class DoublyLinkedList<T> extends ListADT<T> {
 	private Node<T> start;
-	private Node<T> end;
+	private Node<T> end; 
 	
 	/**
 	 * A doubly-linked list starts empty.

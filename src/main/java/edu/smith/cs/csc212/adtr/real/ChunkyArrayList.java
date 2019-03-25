@@ -27,7 +27,7 @@ public class ChunkyArrayList<T> extends ListADT<T> {
 	}
 // TODO
 	@Override
-	public T removeFront() {
+	public T removeFront() { 
 		throw new TODOErr();
 	}
 // TODO
