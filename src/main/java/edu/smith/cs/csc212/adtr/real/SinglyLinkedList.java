@@ -74,11 +74,19 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 	public void addFront(T item) {
 		this.start = new Node<T>(item, start);
 	}
-	// TODO
+	// 
 	@Override
 	public void addBack(T item) {
-		
-		throw new TODOErr();
+		if (this.isEmpty()) {
+			this.addFront(item);
+			return;
+		}
+		for (Node<T> n = this.start; n != null; n = n.next) {
+			if (n.next == null) {
+				n.next = new Node<T>(item,null);
+				return;
+			}
+		}
 	}
 	// TODO
 	@Override
