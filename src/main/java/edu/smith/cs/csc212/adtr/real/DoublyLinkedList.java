@@ -19,28 +19,62 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	
 
 	@Override
+	//
 	public T removeFront() {
 		checkNotEmpty();
-		throw new TODOErr();
+		T front = this.start.value;
+		this.start = this.start.after;
+		return front;
 	}
-
+	//
 	@Override
 	public T removeBack() {
 		checkNotEmpty();
-		throw new TODOErr();
+		if (start == end) {
+			T back = end.value;
+			start = start.after;
+			return back;
+		}
+		else {
+			T back = this.end.value;
+			end = end.before;
+			this.end.after = null;
+			return back;
+		}
 	}
-
+	//
 	@Override
 	public T removeIndex(int index) {
 		checkNotEmpty();
-		throw new TODOErr();
+		checkInclusiveIndex(index);
+		int step = 0;
+		if (index == 0) {
+			T removed = removeFront();
+			return removed;
+		}
+		for (Node<T> n = start; n != null; n = n.after) {
+			if (step == index-1) {
+				T removed = n.after.value;
+				n.after = n.after.after;
+				return removed;
+			}
+			step++;
+		}
+		return null;
 	}
-
+	//
 	@Override
 	public void addFront(T item) {
-		throw new TODOErr();
+		if (start == null) {
+			start = end = new Node<T>(item);
+		}
+		else {
+			Node<T> newNode = start;
+			start = new Node<T>(item);
+			start.after = newNode;
+			newNode.before = start;
+		}
 	}
-
 	@Override
 	public void addBack(T item) {
 		if (end == null) {
@@ -52,39 +86,60 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 			secondLast.after = end;
 		}
 	}
-
+	//TODO
 	@Override
 	public void addIndex(int index, T item) {
 		throw new TODOErr();
 	}
-
+	//
 	@Override
 	public T getFront() {
-		throw new TODOErr();
+		checkNotEmpty();
+		return start.value;	
 	}
-
+	//
 	@Override
 	public T getBack() {
-		throw new TODOErr();
+		checkNotEmpty();
+		return end.value;
 	}
-	
+	//
 	@Override
 	public T getIndex(int index) {
-		throw new TODOErr();
+		checkNotEmpty();
+		if (index < 0) {
+			throw new BadIndexError(index);
+		}
+		if (index >= size()) {
+			throw new BadIndexError(index);
+		}
+		int step = 0;
+		for (Node<T> n = this.start; n != null; n = n.after) {
+			if (index == step) {
+				T atIndex = n.value;
+				return atIndex;
+			}
+			step++;
+		}
+		return null;
 	}
-	
+	//TODO
 	public void setIndex(int index, T value) {
 		throw new TODOErr();
 	}
-
+	//
 	@Override
 	public int size() {
-		throw new TODOErr();
+		int count = 0;
+		for (Node<T> n = this.start; n != null; n = n.after) {
+			count++;
+		}
+		return count;
 	}
-
+	//
 	@Override
 	public boolean isEmpty() {
-		throw new TODOErr();
+		return this.start == null;
 	}
 	
 	/**
