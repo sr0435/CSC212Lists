@@ -39,31 +39,32 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 			}
 		return null;
 	}
-	// TODO
+	// 
 	@Override
 	public T removeIndex(int index) {
+		checkNotEmpty();
 		int step = 0;
-		T removed;
 		for (Node<T> n = this.start; n != null; n = n.next) {
-			System.out.println("step " + step);
-			System.out.println("index " + index);
-			System.out.println("n: " + n.value);
-			System.out.println("n next " + n.next.value);
-			if (step == index-1) {
-				System.out.println("next next " + n.next.next.value);
-				removed = n.next.value;
-				System.out.println("removed " + removed);
+			if (index == 0) {
+				T removed = this.start.value;
+				this.start = this.start.next;
 				return removed;
 			}
-			else {
-				System.out.println("doing else");
-				if (step == index) {
-					n.value = n.next.value;
-					System.out.println(n.value);
-				}
-				removed = n.value;
+			if (step < index-1) {
+				step++;
+				continue;
+			}
+			if (step == index -1) {
+				if (n.next != null) {
+				T removed = n.next.value;
+				n.next = n.next.next;
 				step++;
 				return removed;
+				}
+				else {
+					T removed = n.next.value;
+					return removed;
+				}
 			}
 		}
 		return null;
