@@ -1,14 +1,12 @@
 package edu.smith.cs.csc212.adtr.real;
 
 import edu.smith.cs.csc212.adtr.ListADT;
-import edu.smith.cs.csc212.adtr.errors.BadIndexError;
-import edu.smith.cs.csc212.adtr.errors.TODOErr;
 
 
 public class DoublyLinkedList<T> extends ListADT<T> {
 	private Node<T> start;
 	private Node<T> end; 
-	
+
 	/**
 	 * A doubly-linked list starts empty.
 	 */
@@ -16,7 +14,7 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 		this.start = null;
 		this.end = null;
 	}
-	
+
 
 	@Override
 	//
@@ -47,12 +45,14 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	public T removeIndex(int index) {
 		checkNotEmpty();
 		int step = 0;
+		// easily removes the front
 		if (index == 0) {
 			T removed = removeFront();
 			return removed;
 		}
 		else {
 			for (Node<T> n = start; n != null; n = n.after) {
+				// removes and updates links
 				if (step == index-1) {
 					T removed = n.after.value;
 					n.after = n.after.after;
@@ -66,10 +66,12 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	//
 	@Override
 	public void addFront(T item) {
+		// creates a new node if the list is empty
 		if (start == null) {
 			start = end = new Node<T>(item);
 		}
 		else {
+			// creates a new node and makes that the start
 			Node<T> newNode = start;
 			start = new Node<T>(item);
 			start.after = newNode;
@@ -91,6 +93,7 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	@Override
 	public void addIndex(int index, T item) {
 		checkInclusiveIndex(index);
+		// easily adds to the front
 		if (index == 0 || this.isEmpty()) {
 			addFront(item);
 		}
@@ -128,12 +131,7 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	@Override
 	public T getIndex(int index) {
 		checkNotEmpty();
-		if (index < 0) {
-			throw new BadIndexError(index);
-		}
-		if (index >= size()) {
-			throw new BadIndexError(index);
-		}
+		checkExclusiveIndex(index);
 		int step = 0;
 		for (Node<T> n = this.start; n != null; n = n.after) {
 			if (index == step) {
@@ -170,7 +168,7 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	public boolean isEmpty() {
 		return this.start == null;
 	}
-	
+
 	/**
 	 * The node on any linked list should not be exposed.
 	 * Static means we don't need a "this" of DoublyLinkedList to make a node.

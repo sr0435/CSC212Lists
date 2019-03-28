@@ -2,7 +2,6 @@ package edu.smith.cs.csc212.adtr.real;
 
 import edu.smith.cs.csc212.adtr.ListADT;
 import edu.smith.cs.csc212.adtr.errors.BadIndexError;
-import edu.smith.cs.csc212.adtr.errors.TODOErr;
 
 public class SinglyLinkedList<T> extends ListADT<T> {
 	/**
@@ -10,7 +9,7 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 	 * Node is defined at the bottom of this file.
 	 */
 	Node<T> start;
-	
+
 	@Override
 	public T removeFront() {
 		checkNotEmpty();
@@ -36,7 +35,7 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 				continue;
 			}
 
-			}
+		}
 		return null;
 	}
 	// 
@@ -45,21 +44,24 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 		checkNotEmpty();
 		int step = 0;
 		for (Node<T> n = this.start; n != null; n = n.next) {
+			// takes out the front easily
 			if (index == 0) {
 				T removed = this.start.value;
 				this.start = this.start.next;
 				return removed;
 			}
+			// moves forward
 			if (step < index-1) {
 				step++;
 				continue;
 			}
+			// takes out the next item and updates the links
 			if (step == index -1) {
 				if (n.next != null) {
-				T removed = n.next.value;
-				n.next = n.next.next;
-				step++;
-				return removed;
+					T removed = n.next.value;
+					n.next = n.next.next;
+					step++;
+					return removed;
 				}
 				else {
 					T removed = n.next.value;
@@ -91,6 +93,7 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 	// 
 	@Override
 	public void addIndex(int index, T item) {
+		// easier to add to the front
 		if (index == 0 || this.isEmpty()) {
 			addFront(item);
 		}
@@ -100,9 +103,9 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 			for (Node<T> n = this.start; n != null; n = n.next) {
 				if (n.next == null) {
 					addBack(item);
-					System.out.println("eee");
 					break;
 				}
+				// adds and updates the links
 				if (step == index-1) {
 					n.next = new Node<T>(item,n.next);
 					break;
@@ -111,8 +114,8 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 			}
 		}
 	}
-	
-	
+
+
 	@Override
 	public T getFront() {
 		checkNotEmpty();
@@ -142,7 +145,7 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 		}
 		throw new BadIndexError(index);
 	}
-	
+
 	@Override
 	public void setIndex(int index, T value) {
 		checkNotEmpty();
@@ -169,7 +172,7 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 	public boolean isEmpty() {
 		return this.start == null;
 	}
-	
+
 	/**
 	 * The node on any linked list should not be exposed.
 	 * Static means we don't need a "this" of SinglyLinkedList to make a node.

@@ -2,7 +2,6 @@ package edu.smith.cs.csc212.adtr.real;
 
 import edu.smith.cs.csc212.adtr.ListADT;
 import edu.smith.cs.csc212.adtr.errors.RanOutOfSpaceError;
-import edu.smith.cs.csc212.adtr.errors.TODOErr;
 
 public class FixedSizeList<T> extends ListADT<T> {
 	/**
@@ -13,12 +12,12 @@ public class FixedSizeList<T> extends ListADT<T> {
 	 * This keeps track of what we have used and what is left.
 	 */
 	private int fill;
-	
+
 	public FixedSizeList(int maximumSize) {
 		this.array = new Object[maximumSize];
 		this.fill = 0;
 	}
-	
+
 	@Override
 	protected boolean isEmpty() {
 		return this.fill == 0;
@@ -59,9 +58,6 @@ public class FixedSizeList<T> extends ListADT<T> {
 	@Override
 	public void addIndex(int index, T value) {
 		if (fill >= array.length) {
-			//System.out.println(fill);
-			//System.out.println(array.length);
-
 			throw new RanOutOfSpaceError();
 		}
 		// loop backwards, shifting items to the right.
@@ -74,8 +70,6 @@ public class FixedSizeList<T> extends ListADT<T> {
 
 	@Override
 	public void addFront(T value) {
-		// Start here. Do we have to write this?
-		// Or can we use addIndex somehow?
 		addIndex(0,value);	
 	}
 
@@ -85,7 +79,7 @@ public class FixedSizeList<T> extends ListADT<T> {
 			array[fill++] = value;
 		} else {
 			throw new RanOutOfSpaceError();
-}
+		}
 	}
 
 	@Override

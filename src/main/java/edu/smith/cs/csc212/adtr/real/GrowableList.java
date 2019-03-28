@@ -2,13 +2,12 @@ package edu.smith.cs.csc212.adtr.real;
 
 import edu.smith.cs.csc212.adtr.ListADT;
 import edu.smith.cs.csc212.adtr.errors.BadIndexError;
-import edu.smith.cs.csc212.adtr.errors.TODOErr;
 
 public class GrowableList<T> extends ListADT<T> {
 	public static final int START_SIZE = 10;
 	private Object[] array;
 	private int fill;
-	
+
 	public GrowableList() {
 		this.array = new Object[START_SIZE];
 		this.fill = 0;
@@ -30,13 +29,13 @@ public class GrowableList<T> extends ListADT<T> {
 	public T removeIndex(int index) {
 		checkNotEmpty();
 		checkExclusiveIndex(index);
-		
+
 		T removed = this.getIndex(index);
-		
+
 		// : Now we need to slide everything to the left. done!
 		for (int j=index+1; j<fill; j++) {
 			array[j-1] = array[j];
-			}
+		}
 		fill -= 1;
 		// When we're done, give back the thing that we removed.
 		return removed;
@@ -54,11 +53,11 @@ public class GrowableList<T> extends ListADT<T> {
 		}
 		array[fill++] = item;
 	}
-	
+
 	/**
 	 * This private method is called when we need to make room in our GrowableList.
 	 */
-	
+
 	private void resizeArray() {
 		//saves the items in the old array
 		Object[] oldArray = array.clone();
@@ -87,7 +86,7 @@ public class GrowableList<T> extends ListADT<T> {
 		array[index] = item;
 		fill++;
 	}
-	
+
 	@Override
 	public T getFront() {
 		checkNotEmpty();
@@ -126,7 +125,6 @@ public class GrowableList<T> extends ListADT<T> {
 	@Override
 	public void setIndex(int index, T value) {
 		checkExclusiveIndex(index);
-		// for set index high test
 		if (index == fill) {
 			throw new BadIndexError(index);
 		}

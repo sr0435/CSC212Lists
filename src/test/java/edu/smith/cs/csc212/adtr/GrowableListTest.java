@@ -109,7 +109,7 @@ public class GrowableListTest {
 		Assert.assertEquals("0", data.getIndex(1));
 		Assert.assertEquals("1", data.getIndex(0));
 	}
-	// null pointer exception
+
 	@Test
 	public void testAddBackFull() {
 		ListADT<Integer> items = makeEmptyList();
@@ -125,7 +125,7 @@ public class GrowableListTest {
 			
 		}
 	}
-	//  out of bounds
+
 	@Test
 	public void testAddFrontFull() {
 		ListADT<Integer> items1 = makeEmptyList();
@@ -153,7 +153,7 @@ public class GrowableListTest {
 		items.addBack(num);
 	}
 	
-	// : null pointer
+
 	@Test
 	public void testAddIndexMany() {
 		ListADT<Integer> items1 = makeEmptyList();
@@ -206,7 +206,7 @@ public class GrowableListTest {
 		Assert.assertEquals(0, data.size());
 	}
 	
-	// done!
+
 	@Test
 	public void testRemoveIndex() {
 		ListADT<String> data = makeABCDList();
