@@ -59,6 +59,9 @@ public class FixedSizeList<T> extends ListADT<T> {
 	@Override
 	public void addIndex(int index, T value) {
 		if (fill >= array.length) {
+			//System.out.println(fill);
+			//System.out.println(array.length);
+
 			throw new RanOutOfSpaceError();
 		}
 		// loop backwards, shifting items to the right.
